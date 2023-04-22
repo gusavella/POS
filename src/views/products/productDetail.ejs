@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+  
+  <%- include('../partials/head')%>
+
+  <body>
+    <%- include('../partials/header') %>
+    <main class="product-main">
+      <div class="product-detail-container">
+      <div class="logo">
+        <img src="<%= product.image %>" alt="<%= product.image %>" id="image"/>
+        <h1 id="name"><%= product.name %></h1>
+        <p id="id"><%= product.id %></p>
+      </div>
+
+      <section class="product-buy">
+        <div class="product-buy-info">
+          <div class="product-prices">
+            <p class="product-discount">-<%= product.discount %>%</p>
+            <p class="product-final-price" id="product-final-price" >$<%= product.final_value %></p>
+            <p class="product-price">$<%= product.value %></p>
+          </div>
+
+
+            <button class="panel-button" type="button"  id="product-addcar"      
+            >Añadir al carrito <em class="fa-solid fa-cart-shopping"></em></button>
+
+         
+        </div>
+      </section>
+    </div>
+      <section class="product-info">
+        <h2>Sobre este juego</h2>
+        <p><%= product.description %></p>
+      </section>
+    </main>
+      <%- include('../partials/footer') %>
+    <script type="text/javascript" src="/js/cart.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
+</html>

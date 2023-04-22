@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <%- include('../partials/head')%>
+
+
+<body class="body-register">
+  <%- include('../partials/header')%>
+  <main class="main-register">
+  <div class="cart-container">
+      <div class="cart-section-container" >
+        <section>
+        <div class="cart-tittle" id="cart-section-container">
+          <p>Carrito de compras</p>
+          <hr class="section-top-line" />
+        </div>
+        
+        <div class="cart-tittle" id="article-container">
+          
+        </div>
+          
+      </section>
+      <div class="centeredButton">
+        <button class="edit-product-delete-button" id="toEmpty"><i class="fa-solid fa-trash"></i> Vaciar carrito</button>
+      </div>
+      </div>
+
+
+      <div class="cart-total-container">
+        <section>
+        <div class="cart-tittle">
+          <p>Total</p>
+          <hr class="section-top-line" />
+        </div>
+        <div class="cart-value-description">
+         
+        </div>
+        <hr class="total-bottom-line" />
+        <strong class="total">
+          $<%=totalCart%>
+        </strong>
+        <div class="centeredButton"> <button class="new-product-button" id="buyButton"><i class="fa-solid fa-cart-shopping"></i> Comprar</button></div>
+       
+      </section>
+      </div>
+  </div>
+</main>
+ </body>
+ <script type="text/javascript" src="/js/displayCart.js"></script>
+ <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+ <script type="text/javascript" src="/js/buy.js"></script>
+<%- include('../partials/footer')%>
+</html>

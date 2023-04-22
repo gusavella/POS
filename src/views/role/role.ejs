@@ -1,0 +1,56 @@
+
+  
+  <%- include('../partials/head')%>
+  <body class="body-register">
+    <%- include('../partials/header')%>
+    <a href="/users/adminPanel"><button class="button-back">Atrás</button></a>
+    <main class="main-register">
+     
+    <div class="role-box" id="gradient-border">
+      <div class="role-title">
+        <h3>Roles</h3>
+     </div>
+      <table description="role table" class="responsive-table">
+        <tr class="role-th">
+          <th>Nombre</th>
+          <th>Operaciones</th>
+        </tr>
+
+       <% for (role in roles){ %>
+        <tr>
+          <form action="/roles/<%=roles[role].id%>/edit?_method=PUT" method="post">
+          <td><input type="text" class="role-input" id="<%=roles[role].name%>" value="<%=roles[role].name%>" name="name"></td>
+          <td class="role-td">
+            <div >
+              <button class="new-product-button" type="submit"><i class="fa-regular fa-pen-to-square"></i> Editar</button>
+            </div>
+          </form>
+           <div >
+              <form action="/roles/<%=roles[role].id%>?_method=DELETE" method="post">
+                <button class="edit-product-delete-button" type="submit"><i class="fa-solid fa-trash"></i> Borrar</button>
+              </form>
+           </div>
+          </td>
+        </tr>
+        <%}%>
+        <tr>
+          <form action="/roles/add" method="post" id="role-form">
+            <td ><input type="text" name="name" class="role-input-2" id="new-input-role"></td>            
+            <td ><button class="new-product-button" type="submit"><i class="fa-solid fa-plus"></i> Agregar</button></td>
+            <td></td>
+          </form>  
+        </tr>
+      </table>
+      
+    </div>
+    <p class="warning-msg" id="warning"></p>
+    <% if (locals.errors && errors.name){%>
+      <div class="warning-msg" id="warning">
+          <%= errors.name.msg%>
+      </div>
+  <%}%>
+  </main>
+  <%- include('../partials/footer')%>
+  <script type="text/javascript" src="/js/validationSRCC.js"></script>
+</body>
+

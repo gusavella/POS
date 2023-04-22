@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head')%>
+
+  <body>
+    <%- include('../partials/header')%>
+    <main class="new-product-main" id="main">
+      <div id="errors" class="errors-box">
+        <ul class="errors-list" id="errors-list"></ul>
+      </div>
+      <div class="new-product-box" >
+        <h3>Agregar nuevo producto</h3>
+        <div class="new-product-form-box">
+        <form method="post" action="/products/new" enctype="multipart/form-data" class="new-product-form" id="form">
+          <div class="new-product-div">
+            <label for="name" class="new-product-label">Nombre: </label>
+            <input type="text" name="name" id="name" 
+            placeholder="Ingrese nombre del juego"
+            value="<%= locals.oldData ? oldData.name : null %>"/>
+
+            <% if (locals.errors && errors.name){%>
+              <div class="login-validation-error">
+                  <%= errors.name.msg%>
+              </div>
+          <%}%>
+          </div>
+
+          <div class="new-product-div">
+            <label for="new-img" class="new-product-label">Imagen: </label>
+            <input type="file" name="new-img" id="new-img" />
+          </div>
+          <div class="new-product-div">
+            <label for="description" class="new-product-label">Descripcion: </label>
+            <textarea
+              name="description"
+              id="description"
+              cols="30"
+              rows="10"
+              placeholder="Contenido de la descripcion del juego"
+              value="<%= locals.oldData ? oldData.description : 'Pon aqui la descipcion del producto' %>"
+            >
+            </textarea>
+            <% if (locals.errors && errors.description){%>
+              <div class="login-validation-error">
+                  <%= errors.description.msg%>
+              </div>
+          <%}%>
+            </div>
+          
+          <div class="new-product-div">
+          <label for="category" class="new-product-label">Categoría: </label>
+          <select name="category" id="category">
+            <% for (let i=0 ; i<categories.length ; i++) {%>
+            <option value="<%=categories[i].id%>"><%= categories[i].name %></option>
+            <%}%>
+          </select>
+          <% if (locals.errors && errors.category){%>
+            <div class="login-validation-error">
+                <%= errors.category.msg%>
+            </div>
+        <%}%>
+          </div>
+          <div class="new-product-div">
+          <label for="consoleType" class="new-product-label">Consolas compatibles: </label>
+          <div class="consoleType-checkbox">
+            <% for (let i=0 ; i<consoles.length ; i++) {%>
+              <div class="consoleType-checkbox-div">
+                <input type="checkbox" name="consoles" id="consoles" value="<%=consoles[i].id%>" />
+                <label for="<%=consoles[i].name%>"><%=consoles[i].name%></label>
+              </div>
+              <%}%>
+              <% if (locals.errors && errors.consoles){%>
+                <div class="login-validation-error">
+                    <%= errors.consoles.msg%>
+                </div>
+            <%}%>
+           </div>
+           
+          </div>
+          <div class="new-product-div">
+          <label for="value" class="new-product-label">Precio: </label>
+          <input type="number" step="any" name="value" id="value" placeholder="Ingrese precio del juego" 
+          value="<%= locals.oldData ? oldData.value : null %>"/>
+          <% if (locals.errors && errors.value){%>
+            <div class="login-validation-error">
+                <%= errors.value.msg%>
+            </div>
+        <%}%>
+            </div>
+            <div class="new-product-div">
+              <label for="discount" class="new-product-label">Descuento: </label>
+              <input type="number" step="any" name="discount" id="discount" 
+              placeholder="Ingrese % de descuento"
+              value="<%= locals.oldData ? oldData.discount : null %>"/>
+              <% if (locals.errors && errors.discount){%>
+                <div class="login-validation-error">
+                    <%= errors.discount.msg%>
+                </div>
+            <%}%>
+            </div>
+            <div class="new-product-div">
+              <label for="section" class="new-product-label">Sección: </label>
+              <select name="section" id="section">
+                <% for (let i=0 ; i<sections.length ; i++) {%>
+                  <option value="<%=sections[i].id%>"><%= sections[i].name %></option>
+                  <%}%>
+              </select>
+              <% if (locals.errors && errors.section){%>
+                <div class="login-validation-error">
+                    <%= errors.section.msg%>
+                </div>
+            <%}%>
+              </div>
+              <div class="new-product-div-button">
+          <button id="add-product-button" type="submit" class="new-product-button" ><i class="fa-solid fa-plus"></i> Agregar Producto</button>
+        </div>
+      </form>
+      </div>
+      </div>
+     
+    </main>
+    <%- include('../partials/footer')%>
+    <script  src="/js/productValidator.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
+</html>

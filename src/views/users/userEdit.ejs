@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <%- include('../partials/head')%>
+  <body class="body-register">
+    <%- include('../partials/header')%>
+    <main class="main-register">
+    <div class="register-box">
+      <h3 class="title">Editar Usuario</h3>
+      <hr />
+      <form action="/users/<%=oldData.id%>/edit?_method=PUT " class="register-form"  method="post" enctype="multipart/form-data">
+        <div class="input-box">
+          <div class="register-block-inline">
+            <div class="register-division">
+              <div class="details">
+                <label class="details" for="names">Nombres:</label>
+              </div>
+              <input
+                class="details"
+                type="text"
+                name="names"
+                id="names"
+                placeholder=" Ingresa tu nombre"
+                value="<%= locals.oldData ? oldData.names : null %>"
+              />
+              <% if (locals.errors && errors.names){%>
+                <div class="login-validation-error">
+                    <%= errors.names.msg%>
+                </div>
+            <%}%> 
+            </div>
+            <div class="register-division">
+              <div class="details">
+                <label class="details" for="surnames">Apellidos:</label>
+              </div>
+              <input
+                class="details <%= locals.errors && errors.surnames ? 'is-invalid' : null %>"
+                type="text"
+                name="surnames"
+                id="surnames"
+                placeholder=" Ingresa tu apellido"
+                value="<%= locals.oldData ? oldData.surnames : null %>"
+              />
+              <% if (locals.errors && errors.surnames){%>
+                <div class="login-validation-error">
+                    <%= errors.surnames.msg%>
+                </div>
+              <%}%>
+            </div>
+          </div>
+          <div class="register-block-inline">
+            <div class="register-division">
+              <div class="details">
+                <label class="details" for="password">Contraseña:</label>
+              </div>
+              <input
+                class="details <%= locals.errors && errors.password ? 'is-invalid' : null %>"
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Mínimo 6 caracteres"
+              />
+              <% if (locals.errors && errors.password){%>
+                <div class="login-validation-error">
+                    <%= errors.password.msg%>
+                </div>
+              <%}%>
+            </div>
+            <div class="register-division">
+              <div class="details">
+                <label class="details" for="phone">Teléfono:</label>
+              </div>
+              <input
+                class="details <%= locals.errors && errors.phone ? 'is-invalid' : null %>"
+                type="tel"
+                name="phone"
+                id="phone"
+                placeholder=" 1122334455"
+                value="<%= locals.oldData ? oldData.phone : null %>"
+              />
+              <% if (locals.errors && errors.phone){%>
+                <div class="login-validation-error">
+                    <%= errors.phone.msg%>
+                </div>
+              <%}%>
+            </div>
+          </div>
+          <div class="register-block-inline">
+            <div class="register-division">
+              <div class="details">
+                <label class="details" for="email">E-mail:</label>
+              </div>
+              <input
+                class="details <%= locals.errors && errors.email ? 'is-invalid' : null %>"
+                type="text"
+                name="email"
+                id="email"
+                placeholder=" bestpage@gameshub.com"
+                value="<%= locals.oldData ? oldData.email : null %>"
+              />
+              <% if (locals.errors && errors.email){%>
+                <div class="login-validation-error">
+                    <%= errors.email.msg%>
+                </div>
+              <%}%>
+            </div>
+            <div class="register-division">
+              <div class="details">
+                <label class="details" for="address">Dirección:</label>
+              </div>
+              <input
+                class="details <%= locals.errors && errors.address ? 'is-invalid' : null %>"
+                type="text"
+                name="address"
+                id="address"
+                placeholder=" ej: calle falsa 123"
+                value="<%= locals.oldData ? oldData.address : null %>"
+              />
+              <% if (locals.errors && errors.adress){%>
+                <div class="login-validation-error">
+                    <%= errors.adress.msg%>
+                </div>
+              <%}%>
+            </div>
+            <div class="register-division">
+              <div class="details">
+                <label class="details" for="">Imagen de perfil</label>
+            </div>
+                <input type="file" name="image" id="image">  
+              
+            </div>
+          </div>
+        </div>
+        <div class="register-block-inline">
+        <div class="edit-product-button">
+          <button type="submit" class="new-product-button"><i class="fa-regular fa-pen-to-square"></i> Editar</button>
+        </div>
+      </form>
+      <form action="/users/<%=oldData.id%>?_method=delete" method="POST">
+        <button type="submit" class="edit-product-delete-button"><i class="fa-solid fa-trash"></i> Eliminar</button>
+      </form>
+      </div>
+    </div>
+  </main>
+  <%- include('../partials/footer')%>
+</body>
+</html>
