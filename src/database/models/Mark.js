@@ -14,6 +14,7 @@ module.exports = (sequelize, dataTypes) => {
         }
     };
     let config = {
+        tableName:  'mark',
         timestamps: true,
         paranoid:   true,
         createdAt: 'create_time',
@@ -24,7 +25,7 @@ module.exports = (sequelize, dataTypes) => {
 
     Mark.associate = function(models) {
        
-        Section.hasMany(models.Product, {
+        Mark.hasMany(models.Product, {
             as: "products",
             foreignKey: "id_mark"
         })

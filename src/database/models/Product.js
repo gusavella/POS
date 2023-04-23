@@ -60,37 +60,14 @@ module.exports = (sequelize, dataTypes) => {
 
     Product.associate = function (models) {
 
-
-        // Product.belongsTo(models.Section, {
-        //     as: "section",
-        //     foreignKey: "section_id"
-        // }),
-        // Product.belongsTo(models.Category, {
-        //     as: "category",
-        //     foreignKey: "category_id"
-        // })
-
-        // Product.belongsToMany(models.Console, {
-        //     as: "consoles",
-        //     through: "products_consoles",
-        //     foreignKey: "product_id",
-        //     otherKey: "console_id",
-        //     timestamps: true
-        // })
-
-        // Product.hasMany(models.ProductConsole, {
-        //     as: "products_consoles",
-        //     foreignKey: "product_id"
-        // })
-
-        // Product.hasMany(models.OrderProduct, {
-        //     as: "order_product",
-        //     foreignKey: "product_id"
-        // })
-        // Product.belongsTo(models.ProductConsole, {
-        //     as: "products_consoles",
-        //     foreignKey: "id"
-        // })
+        Product.belongsTo(models.Category, {
+            as: "category",
+            foreignKey: "id_category"
+        })
+        Product.belongsTo(models.Mark, {
+            as: "mark",
+            foreignKey: "id_mark"
+        })
 
    }
  

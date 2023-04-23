@@ -7,10 +7,6 @@ const db = require('../database/models');
 const sequelize = db.sequelize;
 
 
-const productsFilePath = path.join(__dirname, "../database/products.json");
-let products = JSON.parse(fs.readFileSync(productsFilePath, "utf-8"));
-
-
 const controller = {
     all: async (req, res) => {
       try{

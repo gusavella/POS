@@ -19,7 +19,7 @@ async function fetchApi(url, config){
 async function ready(){
      let otherSearchBar = document.querySelector('.search-form_input')
     otherSearchBar.addEventListener('keyup', (e) => {
-        var inputText = e.target.value   
+        let inputText = e.target.value   
         sessionStorage.setItem('searchText', inputText)
     })
     otherSearchBar.addEventListener('change', (e) => {
@@ -34,11 +34,10 @@ async function ready(){
 
     let searchBar = document.querySelector('.search-form_input')
     searchBar.value = sessionStorage.getItem('searchText')
-    var event = new Event('change')
+    let event = new Event('change')
     searchBar.dispatchEvent(event)
     searchBar.addEventListener('change', (e) => {
-      
-        filter(products.products, e.target.value)       
+                                                filter(products.products, e.target.value.trim())       
     })
 }
 
@@ -52,14 +51,15 @@ function displayProducts(products){
             container.innerHTML += `
                 <div class="card">
                     <div class="face front">
-                        <img src="${products[i].image}" alt="imagen-game">
-                        <h3>${products[i].name }</h3>
+                        <img src="${products[i].image}" alt="product-image">
+                        <h3>${products[i].short_description }</h3>
                     </div>
                     <div class="face back">
-                        <h4>${products[i].name}</h4>
+                        <h4>${products[i].short_description}</h4>
                         <p>Categoría: ${products[i].asociations[0]}</p>
+                        <p>Marca: ${products[i].asociations[1]}</p>
                         <div class="link-buy">
-                            <a href="/products/${products[i].id}">${products[i].final_value } - COMPRAR</a>
+                            <a href="/products/${products[i].id}">$${products[i].price } - COMPRAR</a>
                         </div>
                     </div>
                 </div>
@@ -70,7 +70,11 @@ function displayProducts(products){
 function filter(products, search) {
     if (search == "") displayProducts(products)
     else {
-        let productsFiltered = products.filter(product => product.name.toLowerCase().includes(search.toLowerCase()) || product.description.toLowerCase().includes(search.toLowerCase()))
+        let searchBar = document.querySelector('.search-form_input')
+        let productsFiltered = products.filter(product => product.code.trim()==search || product.short_description.toLowerCase().includes(search.toLowerCase())  || product.description.toLowerCase().includes(search.toLowerCase()))
+        // console.log("productos filtrados:",productsFiltered)
         displayProducts(productsFiltered)
+        searchBar.focus()
+        searchBar.select() 
         }
     }

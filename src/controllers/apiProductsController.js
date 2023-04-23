@@ -7,18 +7,19 @@ module.exports = {
             countByCategory: {},
             products: [], 
         }
-        let products = await db.Product.findAll({include: ["section", "category", "consoles"]})
+        let products = await db.Product.findAll({include: [ "category","mark"]})
         let categories = await db.Category.findAll({include: ["products"]})
         categories.forEach(category => response.countByCategory[category.name] = category.products.length)
         response.count = products.length
         response.products = products.map(product => {
             let productDetail = {
                 id: product.id,
-                name: product.name,
-                final_value:product.final_value,
+                code:product.code,
+                short_description: product.short_description,
+                price:product.price,
                 description: product.description,
                 image: `http://localhost:3030${product.image}`,
-                asociations: [product.category.name, product.section, product.consoles],
+                asociations: [product.category.name, product.mark.name],
                 detail: `/api/products/${product.id}`,
             }
             return productDetail

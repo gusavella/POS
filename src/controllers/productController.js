@@ -4,31 +4,27 @@ const db = require('../database/models');
 const sequelize = db.sequelize;
 const {validationResult} = require('express-validator');
 
-const productsFilePath = path.join(__dirname, "../database/products.json");
-let products = JSON.parse(fs.readFileSync(productsFilePath, "utf-8"));
-
-const productsCartFilePath = path.join(__dirname, '../database/productsCart.json');
-let productsCart = JSON.parse(fs.readFileSync(productsCartFilePath, 'utf-8'));
 
 const controller = {
-  index: (req, res) => {
-    db.Product.findAll({include: ["section","category","consoles"]})
+  index: async(req, res) => {
+    let category = await db.Category.findAll()
+    await db.Product.findAll({include: ["category","mark"]})
     .then(products => {
-        res.render('products/main.ejs', {products:products,tittle:'Games Hub'});
+        res.render('products/main.ejs', {category,products:products,tittle:'Teca'});
     })
   },
   best: (req,res) => {
-    db.Product.findAll({include: ["section","category","consoles"]})
+    db.Product.findAll({include: ["category"]})
     .then(products => {
-      res.render('products/bestSelling.ejs', {products:products,tittle:'Games Hub'})
+      res.render('products/bestSelling.ejs', {products:products,tittle:'Teca'})
     })
  
   },
   recommended: (req,res) => {
 
-    db.Product.findAll({include: ["section","category","consoles"]})
+    db.Product.findAll({include: ["category"]})
     .then(products => {
-      res.render('products/recommended.ejs', {products:products,tittle:'Games Hub'})
+      res.render('products/recommended.ejs', {products:products,tittle:'Teca'})
     })
  
   },
@@ -40,14 +36,14 @@ const controller = {
     
   },
   allProducts: (req,res) => {
-    db.Product.findAll({include: ["section","category","consoles"]})
+    db.Product.findAll({include: ["category"]})
     .then(products => {
-      res.render('products/product.ejs', {products:products,tittle:'Games Hub'})
+      res.render('products/product.ejs', {products:products,tittle:'Teca'})
     })
     
   },
   search: (req,res) => {
-    res.render('products/productSearch.ejs', {tittle: 'Games Hub'})
+    res.render('products/productSearch.ejs', {tittle: 'Teca'})
   },
   productDetail: (req, res) => {
     db.Product.findByPk(req.params.id,{include: ["section","category","consoles"]})
