@@ -1,7 +1,7 @@
 let express = require('express');
 let router = express.Router();
 const adminMiddleware = require('../middlewares/adminMiddleware')
-const consoleController =require('../controllers/consoleController');
+const consoleController =require('../controllers/markController');
 
    router.get('/all',consoleController.all)
    router.post('/add', adminMiddleware, consoleController.create)

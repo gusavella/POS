@@ -41,10 +41,10 @@ async function ready(){
     })
 }
 
-function displayProducts(products){
+ function displayProducts(products){
 
     let container = document.querySelector('.product-search')
-    // if(container){
+    if(products){
         container.innerHTML = ``
         for (let i = 0; i < products.length; i++){
         
@@ -65,7 +65,7 @@ function displayProducts(products){
                 </div>
             `
         }
-    // }
+    }
  }
 function filter(products, search) {
     if (search == "") displayProducts(products)

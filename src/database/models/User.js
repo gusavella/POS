@@ -12,7 +12,7 @@ module.exports = (sequelize, dataTypes) => {
             allowNull: false
         },
         password: {
-            type: dataTypes.STRING(32),
+            type: dataTypes.STRING(200),
             allowNull: false
         },
         id_role:  {

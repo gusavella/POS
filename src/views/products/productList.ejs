@@ -44,7 +44,7 @@
                 <% for(let i=0;i<products.length;i++){%>
                  <tr>
                     <td class="product-list">
-                     <p class="list-label"><%=products[i].name %><p>
+                     <p class="list-label"><%=products[i].short_description %><p>
                     </td>
                     <td class="edit-list">  
                         <form action="/products/<%=products[i].id%>/edit" method="get">
@@ -61,8 +61,6 @@
     </div>
 </div>
 </main>
-
-  <%- include('../partials/footer') %>
 </body>
-
+  <%- include('../partials/footer') %>
 </html>

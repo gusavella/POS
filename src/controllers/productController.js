@@ -52,20 +52,17 @@ const controller = {
     })  
   },
   newProduct: async(req, res) => {
-    let categories= await db.Category.findAll();
-    let sections= await db.Section.findAll();
-    let consoles= await db.Console.findAll();
-    res.render("products/newProduct", { tittle: "New Product" ,categories,sections,consoles});
+    const categories= await db.Category.findAll();
+    const marks= await db.Mark.findAll();
+    res.render("products/newProduct", { tittle: "New Product" ,categories,marks});
   },
   create: async(req, res) => {
-    let categories= await db.Category.findAll();
-    let sections= await db.Section.findAll();
-    let consoles= await db.Console.findAll();
-    
+    const categories= await db.Category.findAll();
+    const marks= await db.Mark.findAll();
     const resultValidationProduct = validationResult(req);
       if (resultValidationProduct.errors.length > 0){
         return res.render('products/newProduct', { tittle: 'New Product',
-          categories,sections,consoles,
+          categories,marks,
           errors: resultValidationProduct.mapped(),
           oldData: req.body
         })
@@ -74,30 +71,19 @@ const controller = {
           try{
             let createdProduct= await db.Product.create(
                     {
-                               name : req.body.name ,
-                        description : req.body.description,
-                              image : req.file?'/images/games/'+ req.file.filename:'/images/defaultImage.png',
-                              value : parseFloat(req.body.value),
-                           discount : parseFloat(req.body.discount),
-                        final_value : (parseFloat(req.body.value*(1-req.body.discount/100))).toFixed(2), // Para que solamente tenga dos digitos
-                        category_id : req.body.category,
-                         section_id : req.body.section,
-                          
+                  short_description : req.body.name ,
+                               code : req.body.code,
+                        description : req.body.description.trim(),
+                              image : req.file ? '/images/games/'+ req.file.filename : '/images/defaultImage.png',
+                              price : parseFloat(req.body.value),
+                               cost : parseFloat(req.body.cost),
+                              stock : req.body.stock ? req.body.stock : 1,
+                        id_category : req.body.category,
+                            id_mark : req.body.mark,
+                            id_state: 1  
                     })
-
-
-                if(req.body.consoles){
-                  let consolesAssigned= req.body.consoles
-                  for(let console of consolesAssigned){
-                    await db.ProductConsole.create({
-                      console_id : console,
-                      product_id:createdProduct.id })
-
-                  }
-
-                }
-              
-                  res.redirect('/products/all')
+console.log("Producto creado",createdProduct)
+                  res.redirect('/products/edit/list')
               
               }
   catch(e){console.log(e)} 
@@ -106,18 +92,10 @@ const controller = {
   showEdit: async (req, res) => {
     try{
     let categories= await db.Category.findAll();
-    let sections= await db.Section.findAll();
-    let consoles= await db.Console.findAll();
-    let product= await  db.Product.findByPk(req.params.id,{include: ["section","category","consoles"]})
-    let productConsoles = await  db.ProductConsole.findAll({where:{product_id:req.params.id}})
-    let productConsolesArray=[]
-        
-    if(productConsoles){
-    productConsoles.forEach(productConsole=>{
-      productConsolesArray.push(productConsole.console_id)
-    })
-   }
-    res.render("products/editProduct.ejs", { tittle: "Editar Producto" ,product,productConsolesArray,categories,sections,consoles,productConsolesArray});
+    let marks= await db.Mark.findAll();
+    let product= await  db.Product.findByPk(req.params.id,{include: ["category","mark"]})
+  
+    res.render("products/editProduct.ejs", { tittle: "Editar Producto" ,product,categories,marks});
     }
     catch(e){
       console.log(e)
@@ -125,39 +103,30 @@ const controller = {
   },
 
   update: async(req, res) => {
-    
+    console.log('Entra a actualizar')
     let productOld = await  db.Product.findByPk(req.params.id)
     let categories= await db.Category.findAll();
-    let sections= await db.Section.findAll();
-    let consoles= await db.Console.findAll();
-    let product= await  db.Product.findByPk(req.params.id,{include: ["section","category","consoles"]})
-    let productConsoles = await  db.ProductConsole.findAll({where:{product_id:req.params.id}})
-    let productConsolesArray=[]
-        
-    if(productConsoles){
-    productConsoles.forEach(productConsole=>{
-      productConsolesArray.push(productConsole.console_id)
-    })
-   }
-    
+    let marks= await db.Mark.findAll();
+    let product= await  db.Product.findByPk(req.params.id,{include: ["category","mark"]})
+
     const resultValidationProduct = validationResult(req);
       if (resultValidationProduct.errors.length > 0){
         return res.render('products/editProduct', { tittle: 'Editar Producto',
-          categories,sections,consoles,productConsolesArray,product,
+          categories,marks,product,
           errors: resultValidationProduct.mapped(),
           oldData: req.body
         })
       } else {
         try{
-        const editedProduct={
-          name : req.body.name,
-         value : parseFloat(req.body.value),
-      discount : parseFloat(req.body.discount),
-   final_value : (parseFloat(parseFloat(req.body.price)*(1-parseFloat(req.body.discount)/100))).toFixed(2) ,// Para que solamente tenga dos digitos
-    section_id : req.body.section,
-         image : req.file?'/images/games/'+req.file.filename:productOld.image,
-   category_id : req.body.category,
-   description : req.body.description
+        const editedProduct={   
+  short_description : req.body.name,
+              price : req.body.value,
+               cost : req.body.cost,
+        description : req.body.description,
+              image : req.file?'/images/games/'+req.file.filename:productOld.image,
+        id_category : req.body.category,
+            id_mark : req.body.mark,
+              stock : req.body.stock ?   req.body.stock : productOld.stock
 }
 
  await db.Product.update(editedProduct, {
@@ -165,18 +134,7 @@ const controller = {
      id:req.params.id
    }
  });
- await db.ProductConsole.destroy({where:{ 
-   product_id:req.params.id
- }})
- if(req.body.consoles){
-      let consolesAssigned= req.body.consoles
-   for(const element of consolesAssigned){
-     await db.ProductConsole.create({
-       console_id : element,
-       product_id : req.params.id })
-
-   }
- }
+ res.redirect('/products/edit/list')
 }
 catch(e){
 console.log(e)
@@ -228,7 +186,7 @@ res.redirect(`/products/${req.params.id}`)
       res.redirect(`/products/cart/all`)
   },
   showList:(req,res)=>{
-    db.Product.findAll({include: ["section","category","consoles"]})
+    db.Product.findAll({include: ["category","mark"]})
     .then(products => {
       res.render('products/productList.ejs', {products:products,tittle:'Lista de productos'})
     })

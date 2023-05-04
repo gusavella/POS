@@ -11,8 +11,8 @@
         <div class="login-box">
             <h3>Login</h3>
             <form class="login-form" id="login-form" action="/users/login" method="post">
-                <label class='label-login' for="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="name@mail.com">
+                <label class='label-login' for="email">Usuario</label>
+                <input type="text" name="email" id="email" placeholder="username">
                 <% if (locals.errors && errors.email){%>
                     <div class="login-validation-error">
                         <%= errors.email.msg%>

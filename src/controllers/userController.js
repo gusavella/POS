@@ -41,11 +41,13 @@ const controller = {
 		}
       db.User.findOne({
         where:{
-          email:req.body.email
+          username:req.body.email
         }
       },{include: ["role"]})
       .then(function(userToLogin){
+    
         if(userToLogin){
+          
         let isOkPassword = bcrypt.compareSync(req.body.password,userToLogin.password)
         if(isOkPassword){
           delete userToLogin.password
@@ -69,7 +71,7 @@ const controller = {
       return res.render('users/login.ejs',{ tittle:'Login',
                                   errors:{
                                     email:{
-                                      msg:'Credenciales invalidas - email '
+                                      msg:'Credenciales invalidas - usuario '
                                     }
                                   }
                   })

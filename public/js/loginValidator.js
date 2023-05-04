@@ -15,18 +15,16 @@ let loginForm = document.getElementById('login-form');
     let errorsBox= document.getElementById('errors')
     errorsBox.style.visibility='hidden'
 
-console.log('form:',loginForm)
+
 
     loginForm.addEventListener ('submit', function(e){
         let errors = [];
         e.preventDefault();
-        console.log('Entramos en validacion')
+        // console.log('Entramos en validacion')
 
     if (email.value ==('')){
-        errors.push ('Debes ingresar una dirección de email');
-    } else if (email.value.indexOf('@') == -1 || email.value.indexOf ('.') == -1 & email.value.length > 0) {
-        errors.push ('Debes ingresar un email válido');
-    }
+        errors.push ('Debes ingresar un usuario');
+    } 
     if (password.value == ('')) {
         errors.push ('Debes ingresar una contraseña');
     } else if (password.length < 6) {

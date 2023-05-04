@@ -11,8 +11,8 @@
         <div class="new-product-box">
           <h3>Edicion de producto</h3>
           <div class="edit-product-form-box">
-           
-            <img src=" <%= product.image %> "  class="edit-product-image" alt="imagen de juego" >
+        
+            <img src=" <%= product.image %> "  class="edit-product-image" alt="imagen del producto" >
            
             <form action="/products/<%=product.id%>/edit?_method=PUT" class="edit-product-form" method="post" enctype="multipart/form-data" id="form">
 
@@ -23,7 +23,7 @@
 
               <div class="edit-product-div">
                 <label for="name" class="edit-product-label">Nombre:</label>
-                <input type="text" name="name" id="name" value="<%=locals.oldData ? oldData.name : product.name%>" />
+                <input type="text" name="name" id="name" value="<%=locals.oldData ? oldData.name : product.short_description%>" />
                 <% if (locals.errors && errors.name){%>
                   <div class="login-validation-error">
                       <%= errors.name.msg%>
@@ -54,61 +54,54 @@
                   </div>
               <%}%>
               </div>
+              <%console.log('oldData:',locals.oldData?oldData:'nada')%>
               <div class="edit-product-div">
-                <label for="console" class="edit-product-label" >Consolas compatibles:</label>
-                <div class="consoleType-checkbox">
-                  <% for (let i=0 ; i<consoles.length ; i++) {%>
-                    <div class="consoleType-checkbox-div">
-                      <input type="checkbox" name="consoles" id="consoles"  value="<%=consoles[i].id%>" 
-                          <% for (let j=0 ; j<productConsolesArray.length ; j++) {%>
-                                <%=productConsolesArray[j]==consoles[i].id?'checked':' '%>
-                          <%}%>
-                     />
-                      <label for="<%=consoles[i].name%>"><%=consoles[i].name%></label>
-                    </div>
-                    <%}%>
-
-
-                </div>
-               <% if (locals.errors && errors.consoles){%>
-                <div class="login-validation-error">
-                    <%= errors.consoles.msg%>
-                </div>
-            <%}%>
+                <label for="mark" class="edit-product-label" >Categoria</label>
+                <select name="mark" id="mark">
+                  <% for (let mark in marks) {%>
+                    <option value=<%=marks[mark].id%> <%=product.id_mark==marks[mark].id ?'selected':''%> ><%= marks[mark].name %></option>
+                  <%}%>
+                </select>
+                <% if (locals.errors && errors.mark){%>
+                  <div class="login-validation-error">
+                      <%= errors.mark.msg%>
+                  </div>
+              <%}%>
               </div>
+
+              <div class="edit-product-div">
+                <label for="cost" class="edit-product-label" >Costo:</label>
+                <input step="any" type="number" name="cost" id="cost" value="<%=locals.oldData ? oldData.cost : product.cost%>" />
+                <% if (locals.errors && errors.cost){%>
+                  <div class="login-validation-error">
+                      <%= errors.cost.msg%>
+                  </div>
+              <%}%>
+              </div>
+          
               <div class="edit-product-div">
                 <label for="price" class="edit-product-label" >Precio:</label>
-                <input step="any" type="number" name="value" id="value" value="<%=locals.oldData ? oldData.value : product.value%>" />
-                <% if (locals.errors && errors.value){%>
+               
+                <input step="any" type="number" name="price" id="value" value="<%=locals.oldData ? oldData.price : product.price%>" />
+                <% if (locals.errors && errors.price){%>
                   <div class="login-validation-error">
-                      <%= errors.value.msg%>
+                      <%= errors.price.msg%>
                   </div>
               <%}%>
               </div>
-              <div class="edit-product-div">
-                <label for="discount" class="edit-product-label" >Descuento:</label>
-                <input step="any" type="number" name="discount" id="discount" value="<%=locals.oldData ? oldData.discount : product.discount%>" />
-                <% if (locals.errors && errors.discount){%>
+              <div class="new-product-div">
+                <label for="name" class="new-product-label">Codigo: </label>
+                <input type="text" name="code" id="code" value="<%=locals.oldData ? oldData.code : product.code%>"
+                placeholder="Ingrese codigo del producto"
+                value="<%= locals.oldData ? oldData.code : null %>"/>
+    
+                <% if (locals.errors && errors.code){%>
                   <div class="login-validation-error">
-                      <%= errors.discount.msg%>
+                      <%= errors.code.msg%>
                   </div>
               <%}%>
-              </div>
-              <div class="edit-product-div">
-                <label for="section" class="edit-product-label" >Sección</label>
-                <select name="section" id="section">
-
-                  <% for (let i=0 ; i<sections.length ; i++) {%>
-                    <option value=<%=sections[i].id%> <%=product.section_id==sections[i].id ?'selected':''%> ><%= sections[i].name %></option>
-                  <%}%>
-                  
-                </select>
-                <% if (locals.errors && errors.section){%>
-                  <div class="login-validation-error">
-                      <%= errors.section.msg%>
-                  </div>
-              <%}%>
-              </div>
+              </div>   
+              
               <div class="edit-product-button">
                 <button id="add-product-button" class="new-product-button" type="submit"><i class="fa-regular fa-pen-to-square"></i> Editar</button>
               </div>

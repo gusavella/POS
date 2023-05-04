@@ -22,8 +22,8 @@
                
             </div>
             <div class="data-profile">
-                
-                <% if(user.role!=undefined && user.role.name=='admin'){%>
+                <% console.warn("user:",user.role.name)%>
+                <% if(user.role!=undefined && (user.role.name.toUpperCase()=='admin'.toUpperCase()|| user.role.name.toUpperCase()=='administrador'.toUpperCase())){%>
                     <form action="/users/adminPanel" method="get">
                         <button class="panel-button" type="submit" ><i class="fa-regular fa-pen-to-square"></i> Panel admin</button>
                     </form>

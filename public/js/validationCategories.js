@@ -22,7 +22,7 @@ form.addEventListener("submit", (e) => {
     }
   }
   if(errors.length > 0){
-    parrafo.innerText = 'Debe ingresar una sección válida y no repetida.';
+    parrafo.innerText = 'Debe ingresar una categoria válida y no repetida.';
   } else {
     parrafo.innerText = 'Enviado';
     form.submit();
