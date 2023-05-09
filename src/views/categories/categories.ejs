@@ -17,7 +17,7 @@
        <% for (category in categories){ %>
         <tr>
           <form action="/categories/<%=categories[category].id%>/edit?_method=PUT" method="post">
-          <td><input type="text" class="role-input" id="<%=categories[category].name%>" value="<%=categories[category].name%>" name="name"></td>
+          <td><input type="text" class="role-input" id="role-input" value="<%=categories[category].name%>" name="name"></td>
           <td class="role-td">
             <div >
               <button class="new-product-button" type="submit"><i class="fa-regular fa-pen-to-square"></i> Editar</button>
@@ -32,8 +32,8 @@
         </tr>
         <%}%>
         <tr>
-          <form action="/categories/add" method="post" id="categories-form">
-            <td ><input type="text" name="name" class="role-input-2" id="new-input-category"></td>            
+          <form action="/categories/add" method="post" id="role-form">
+            <td ><input type="text" name="name" class="role-input-2" id="new-input-role"></td>            
             <td ><button class="new-product-button" type="submit"><i class="fa-solid fa-plus"></i> Agregar</button></td>
             <td></td>
           </form>  
@@ -49,6 +49,6 @@
   <%}%>
   </main>
   <%- include('../partials/footer')%>
-  <script type="text/javascript" src="/js/validationCategories.js"></script>
+  <script  src="/js/validationSRCC.js"></script>
 </body>
 

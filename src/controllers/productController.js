@@ -139,9 +139,9 @@ console.log("Producto creado",createdProduct)
 catch(e){
 console.log(e)
 }
-res.redirect(`/products/${req.params.id}`)
+
       }
-  
+
 
     
   },
@@ -151,7 +151,7 @@ res.redirect(`/products/${req.params.id}`)
        await  db.Product.destroy({where :{
                                           id:req.params.id
                                         }})   
-      res.redirect('/')
+    res.redirect('/products/edit/list')
     }
     catch(e){
       console.log(e)
@@ -160,7 +160,7 @@ res.redirect(`/products/${req.params.id}`)
   
   cart: (req, res) => {
     let totalCart=0
-    productsCart = JSON.parse(fs.readFileSync(productsCartFilePath, 'utf-8'));
+    productsCart = [];
     for(const element of productsCart) { 
       totalCart=element.discountValue+totalCart
      }
