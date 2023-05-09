@@ -46,9 +46,9 @@ const controller = {
     res.render('products/productSearch.ejs', {tittle: 'Teca'})
   },
   productDetail: (req, res) => {
-    db.Product.findByPk(req.params.id,{include: ["section","category","consoles"]})
+    db.Product.findByPk(req.params.id,{include: ["category","mark"]})
     .then(product => {
-           res.render("products/productDetail", { tittle: "Product" , product: product});
+           res.render("products/productDetail", { tittle: "Product" , product});
     })  
   },
   newProduct: async(req, res) => {

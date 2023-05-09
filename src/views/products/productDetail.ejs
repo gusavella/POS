@@ -9,16 +9,15 @@
       <div class="product-detail-container">
       <div class="logo">
         <img src="<%= product.image %>" alt="<%= product.image %>" id="image"/>
-        <h1 id="name"><%= product.name %></h1>
+        <h1 id="name"><%= product.short_description %></h1>
         <p id="id"><%= product.id %></p>
       </div>
 
       <section class="product-buy">
         <div class="product-buy-info">
           <div class="product-prices">
-            <p class="product-discount">-<%= product.discount %>%</p>
-            <p class="product-final-price" id="product-final-price" >$<%= product.final_value %></p>
-            <p class="product-price">$<%= product.value %></p>
+            <p class="product-discount"><%= product.mark.name %></p>
+            <p class="product-final-price" id="product-final-price" >$<%= product.price %></p>
           </div>
 
 
