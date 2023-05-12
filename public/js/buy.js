@@ -18,7 +18,7 @@ function  ready(){
      let prodsCart = JSON.parse(localStorage.getItem("productsInCart"))
      console.log('carrito',prodsCart)
      let body = {
-                    total:prodsCart.reduce((acum, act) => acum += act.subTotal ,0).toFixed(2) ,
+                    total:prodsCart.reduce((acum, act) => acum += act.subTotal ,0) ,
                     products:prodsCart
                 }
     if(body.total>0){

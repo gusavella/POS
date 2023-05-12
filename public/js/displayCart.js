@@ -64,12 +64,12 @@ function displayCart() {
                  
             <div class="cart-value">
               <p>${element.name}</p>
-              <p>$${element.subTotal.toFixed(2) }</p>
+              <p>$${element.subTotal }</p>
             </div>    
 
             `
         }
-        total.innerText='$'+prodsCart.reduce((acum, act) => acum += act.subTotal ,0).toFixed(2) 
+        total.innerText='$'+prodsCart.reduce((acum, act) => acum += act.subTotal ,0)
         
     }
 

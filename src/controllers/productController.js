@@ -13,11 +13,25 @@ const controller = {
         res.render('products/main.ejs', {category,products:products,tittle:'Teca'});
     })
   },
-  best: (req,res) => {
-    db.Product.findAll({include: ["category"]})
+  byCategory: async(req,res) => {
+
+    if(req.params.id){
+
+   const category=await  db.Category.findByPk(req.params.id)
+    db.Product.findAll(
+                        {
+                          where:{
+                                  id_category:req.params.id
+                                  }
+                        },
+                        {include: ["category"]})
     .then(products => {
-      res.render('products/bestSelling.ejs', {products:products,tittle:'Teca'})
+      res.render('products/byCategory.ejs', {products,tittle:'Teca',category_name:category.name})
     })
+  }
+  else{
+    res.redirect('/')
+  }
  
   },
   recommended: (req,res) => {

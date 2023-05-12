@@ -13,6 +13,13 @@
         <div class="cart-tittle" id="cart-section-container">
           <p>Carrito de compras</p>
           <hr class="section-top-line" />
+          <div>
+            <form method="post" action="/api/products/search/code" id="form-add-product-with-code">
+              <label>Codigo</label>
+              <input type="text" class="form-control"  placeholder="Ingresar aqui el codigo" name="code"></input>
+              <button tye="submit" class="new-product-button" id="add-product-with-code"><i class="fa-solid fa-plus"></i> Añadir</button>
+            </form>
+          </div>
         </div>
         
         <div class="cart-tittle" id="article-container">
@@ -49,5 +56,6 @@
  <script type="text/javascript" src="/js/displayCart.js"></script>
  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  <script type="text/javascript" src="/js/buy.js"></script>
+ <script type="text/javascript" src="/js/addInCartByScanner.js"></script>
 <%- include('../partials/footer')%>
 </html>
