@@ -2,13 +2,14 @@
   <%- include('../partials/head')%>
   <body class="body-register">
     <%- include('../partials/header')%>
-    <main class="main-register">
+    <main class="orders-container">
     <div class="orders-container" >
       <h3 class="title">Ordenes</h3>
      
       <table description="orders table">
         <tr class="role-th">
           <th>Orden</th>
+          <th>Fecha</th>
           <th>Valor</th>
           <th>Productos</th>
         </tr>
@@ -16,16 +17,22 @@
           <% for (order in orders){ %>
             <tr class="orders_tr">
             <td class="orders-td"><%=orders[order].id%></td>
-              <td class="orders-td">
+            <td class="orders-td">
+              <%= orders[order].create_time.toString().substring(0, 25) %>
+            </td>
+            <td class="orders-td">
                 $<%=orders[order].total%>
-              </td>
+            </td>
+
+            
 
               <td class="orders-td">
                 <ul>
                   <% for (orderProduct in orders[order].order_product){%>
                     <li>
-                      <div class="cart-text">
-                        <%= products[orders[order].order_product[orderProduct].product_id].name %>
+                      <% let productOfOrder=products.find((prod) =>orders[order].order_product[orderProduct].id_product==prod.id) %>
+                      <div class="item-order">
+                        <%= productOfOrder  ? productOfOrder.short_description :'producto'%>
                         $<%= orders[order].order_product[orderProduct].value%> X 
                         <%=orders[order].order_product[orderProduct].quantity%>=
                         $<%=orders[order].order_product[orderProduct].subTotal%>

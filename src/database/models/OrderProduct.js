@@ -6,30 +6,30 @@ module.exports = (sequelize, dataTypes) => {
             primaryKey: true,
             autoIncrement: true
         },
-        quantity: {
-            type: dataTypes.INTEGER(),
-            allowNull: false        
-        },
         value: {
             type: dataTypes.FLOAT,
+            allowNull: false        
+        },
+        quantity: {
+            type: dataTypes.INTEGER(),
             allowNull: false        
         },
         subTotal: {
             type: dataTypes.FLOAT,
             allowNull: false        
         },
-        order_id: {
+        id_order: {
             type: dataTypes.BIGINT(10).UNSIGNED,
             allowNull: false
         },
-        product_id: {
+        id_product: {
             type: dataTypes.BIGINT(10).UNSIGNED,
             allowNull: false
         },
        
     };
     let config = {
-        tableName:'Orders_Products',
+        tableName:'Order_Products',
         timestamps: true,
         paranoid:   true,
         createdAt: 'create_time',
@@ -43,12 +43,12 @@ module.exports = (sequelize, dataTypes) => {
 
         ProductConsole.belongsTo(models.Product, {
             as: "product",
-            foreignKey: "product_id"
+            foreignKey: "id_product"
         })
 
         ProductConsole.belongsTo(models.Order, {
             as: "order",
-            foreignKey: "order_id"
+            foreignKey: "id_order"
         })
        
 

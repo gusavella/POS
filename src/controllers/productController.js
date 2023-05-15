@@ -137,7 +137,7 @@ console.log("Producto creado",createdProduct)
               price : req.body.value,
                cost : req.body.cost,
         description : req.body.description,
-              image : req.file?'/images/games/'+req.file.filename:productOld.image,
+              image : req.file ?'/images/games/'+req.file.filename:productOld.image,
         id_category : req.body.category,
             id_mark : req.body.mark,
               stock : req.body.stock ?   req.body.stock : productOld.stock

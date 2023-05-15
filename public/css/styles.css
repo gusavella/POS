@@ -340,7 +340,11 @@ a{
     text-shadow: 3px 3px 20px #ff99cc,
     -2px 1px 30px #ff99cc;
 } */
+.productsByCategory{
 
+    color: red
+
+}
 .best-selling,
 .product-search,
 .recommended,
@@ -488,13 +492,13 @@ a{
 .section-title a {
     text-decoration: none;
     padding: 0 15px;
-    color: white;
+    color: #6a8eae;
     font-size: 1.2rem;
     transition: all 0.3s;
 }
 
 .section-title a:hover {
-    color: #1AADB4;
+    color: #157145;
 }
 
 .section-1 {
@@ -774,7 +778,7 @@ a{
 
 .product-prices{
     display:flex;
-    justify-content: space-between;
+    justify-content: space-around;
     padding-top: 15px;
     margin-bottom: 15px;
 }
@@ -925,6 +929,8 @@ h2 {
 }
 
 /**/
+
+
 /* --------------------------- not-found page --------------------------- */
 
 .not-found{
@@ -1755,4 +1761,11 @@ padding: 50px;
     margin-bottom: 10px;
     padding: 10px;
     flex-direction: column;
+}
+
+
+.item-order{
+    display:flex;
+    text-align: left;
+    flex-direction: row;
 }

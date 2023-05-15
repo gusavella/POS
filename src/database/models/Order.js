@@ -10,13 +10,14 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.FLOAT(),
             allowNull: false
         },
-        user_id: {
+        id_user: {
             type: dataTypes.BIGINT(10).UNSIGNED,
             allowNull: false
         },
 
     };
     let config = {
+        tableName:  'order',
         timestamps: true,
         paranoid:   true,
         createdAt: 'create_time',
@@ -30,12 +31,12 @@ module.exports = (sequelize, dataTypes) => {
 
         Order.belongsTo(models.User, {
             as: "user",
-            foreignKey: "user_id"
+            foreignKey: "id_user"
         })
        
         Order.hasMany(models.OrderProduct, {
             as: "order_product",
-            foreignKey: "order_id"
+            foreignKey: "id_order"
         })
 
    

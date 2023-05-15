@@ -13,18 +13,18 @@ const controller = {
         try{
             // console.log('productos:',req.body.products )
            let createdOrder=await db.Order.create({
-                                 total:req.body.total,
-                                 user_id:req.session.userLogged.id    // para grabar el id del usuario que esta en la sesion (logueado)         
+                                 total  :   req.body.total,
+                                id_user :   req.session.userLogged.id    // para grabar el id del usuario que esta en la sesion (logueado)         
                                 })
-            // console.log('orden creada:',createdOrder)    
+             console.log('orden creada:',createdOrder)    
             let products=    req.body.products            
             for(let product in products){
                     await db.OrderProduct.create({
                         quantity : products[product].quantity,
                            value : products[product].price,
                         subTotal : products[product].subTotal,
-                        order_id : createdOrder.id,
-                      product_id : products[product].id
+                        id_order : createdOrder.id,
+                      id_product : products[product].id
 
                     })
             }                       
@@ -34,7 +34,7 @@ const controller = {
                 }                      
            })
         }catch(e){
-           // console.log(e)
+            console.log(e)
         //    console.log('Nombre:',e.name)  
         //    console.log('errors:',e.errors) 
          //  console.log('errors length:',e.errors.length)  
@@ -73,9 +73,9 @@ const controller = {
         try{
             let orders=await db.Order.findAll({include:["order_product"]})
             let products=await db.Product.findAll()
-            let filteredOrders=orders.filter(order=>order.user_id==req.params.id)
+            let filteredOrders=orders.filter(order=>order.id_user==req.params.id)
 
-            //   res.json(filteredOrders)
+             //  res.json(filteredOrders)
             res.render('orders/byUser.ejs',{tittle:'Ordenes del usuario',orders:filteredOrders,products})
          }catch(e){
              console.log(e)
