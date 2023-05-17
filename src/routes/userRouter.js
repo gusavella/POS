@@ -32,7 +32,7 @@ router.get('/logout',userController.logout)
 
 
 //REGISTER
-router.get ("/register", guestMiddleware, userController.register);
+router.get ("/register", userController.register);
 
 router.post('/register', upload.single('image'), validateRegisterMiddleware ,userController.processRegister);
 

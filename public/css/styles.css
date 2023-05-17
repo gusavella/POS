@@ -645,7 +645,7 @@ a{
     flex-direction: row;
     justify-content: center;
     padding: 10px  0px ;
-    color:#1AADB4;
+    color:#9BD1E5;
     font-size:24px;
     
 }
@@ -1237,6 +1237,9 @@ color:white;
 .role-td{
     display:flex;
     align-self: center;
+    flex-direction: row;
+    justify-content: center;
+
 }
 .role-input , .role-input-2{
     border-radius: 5px;
@@ -1320,6 +1323,7 @@ color:white;
     cursor: pointer;
 }
 .panel-button {
+    display: flex;
     margin: 7px;
     padding: 5px 7px;
     border-radius: 5px;
@@ -1327,7 +1331,10 @@ color:white;
     background-color: #1AADB4;
     color: white;
     transition: all 450ms;
-    width:130px;
+    width: 130px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 .panel-button:hover{
     background-color: #183153;

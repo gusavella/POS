@@ -7,6 +7,8 @@ const orderController =require('../controllers/orderController');
    router.post('/add',orderController.create)
 
    router.get('/user/:id',orderController.searchByUser)
+   router.get('/print/:id',orderController.printOrder)
+
 //    router.put('/:id/edit',roleController.update)
 //    router.delete('/:id',roleController.delete)
 

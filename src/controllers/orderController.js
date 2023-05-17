@@ -1,4 +1,8 @@
 const db = require('../database/models');
+const fs = require('fs');
+// const PDFDocument = require('pdfkit-table');
+const PDFDocument = require('pdfkit');
+const PDFTable = require('pdfkit-table');
 const sequelize = db.sequelize;
 const controller = {
     all: async (req, res) => {
@@ -76,11 +80,79 @@ const controller = {
             let filteredOrders=orders.filter(order=>order.id_user==req.params.id)
 
              //  res.json(filteredOrders)
-            res.render('orders/byUser.ejs',{tittle:'Ordenes del usuario',orders:filteredOrders,products})
+            res.render('orders/byUser.ejs',{tittle:'Ordenes del usuario',orders:filteredOrders,products,userId:req.params.id})
          }catch(e){
              console.log(e)
          }
+      },
+      printOrder: async (req,res)=>{
+try{
+        let allOrders=await db.Order.findAll({include:["order_product"]})
+            let products=await db.Product.findAll()
+            let orders=allOrders.filter(order=>order.id_user==req.params.id)
+            let rows=[]
+            let totalInOrders=0
+             if(orders){
+              for (let order in orders){ 
+                
+                let productsinOrder=""
+                for( let orderProduct in orders[order].order_product){
+                  let productOfOrder=products.find((prod) =>orders[order].order_product[orderProduct].id_product==prod.id)
+                  productsinOrder+=`${productOfOrder  ? productOfOrder.short_description :'producto'} ${orders[order].order_product[orderProduct].value} X ${orders[order].order_product[orderProduct].quantity}=${orders[order].order_product[orderProduct].subTotal}\n`
+                }
+                
+                rows.push (  [
+                  `${orders[order].id}`,
+                  `${orders[order].create_time.toString().substring(0, 25)}`,
+                  `$ ${orders[order].total}`,
+                  `${productsinOrder}`,
+                 
+                ])
+                totalInOrders+=parseInt(orders[order].total)
+               
+                }
+              rows.push(["","TOTAL",`$${totalInOrders}`])
+           }else if(!orders){
+            rows= [
+              "No hay datos para mostrar",
+            ]
+           }
+           
+
+           const table = {
+            title: "Teca papeleria",
+            subtitle: "Informe de ordenes",
+            headers: [ "Id", "Fecha","Valor","Productos" ],
+            rows}
+
+     
+        // init document
+          let doc = new PDFTable({ margin: 30, size: 'Letter' });
+          // save document
+          doc.pipe(fs.createWriteStream("./public/tabla.pdf"));
+
+
+            // the magic
+            let createdPDF=await doc.table(table);
+            // done!
+            console.log(createdPDF)
+            doc.end();fs.rmSync
+        // // Leer el archivo PDF generado
+        const file = fs.readFileSync('./public/tabla.pdf');
+
+        if(file){
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename=tabla.pdf');
+        res.send(file);
+        }
+      
+
+    } 
+      catch(e){
+
+        console.log(e)
       }
+    }
      
 
 }

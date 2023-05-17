@@ -52,11 +52,13 @@ const controller = {
         if(isOkPassword){
           delete userToLogin.password
           req.session.userLogged=userToLogin
+
+          //  console.log('Usuario logueado desde controlador:',req.session.userLogged.role)
           if(req.body.rememberCheck){
             res.cookie('userEmail',`${userToLogin.email}`,{maxAge:1000*60*10})
           }
          
-          // console.log(req.session)
+           console.log(req.session)
             return res.redirect(`/users/detail/${userToLogin.id}`)
         }
         return res.render('users/login.ejs',{ tittle:'Login',
@@ -167,7 +169,7 @@ const controller = {
       
     },
     profile: (req, res) => {
-      res.render('users/userDetail', {tittle:'Games Hub'})
+      res.render('users/userDetail', {tittle:'Teca'})
     }
     ,
     panel:(req,res)=>{

@@ -64,6 +64,7 @@ function displayCart() {
                  
             <div class="cart-value">
               <p>${element.name}</p>
+               <p> X ${element.quantity}</p>
               <p>$${element.subTotal }</p>
             </div>    
 

@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/gusavella/grupo_6_Games_Hub#readme",
   "dependencies": {
+    "@jridgewell/sourcemap-codec": "^1.4.15",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -30,6 +31,9 @@
     "morgan": "~1.9.1",
     "multer": "^1.4.5-lts.1",
     "mysql2": "^2.2.5",
+    "pdfkit": "^0.13.0",
+    "pdfkit-table": "^0.1.99",
+    "pdfmake": "^0.2.7",
     "prop-types": "^15.8.1",
     "react-router-dom": "^6.8.0",
     "sequelize": "^6.5.0"

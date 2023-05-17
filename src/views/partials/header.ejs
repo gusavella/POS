@@ -11,11 +11,11 @@
         <% if (locals.isLogged){%>
           <li><a class="header-link" href="/users/logout">Logout</a></li>
         <%}%>
-        <% if (!locals.isLogged){%>
+        <% if (locals.isLogged && locals.userLogged.id==1){%>
           <li><a class="header-link" href="/users/register">Register</a></li>
         <%}%>
         <% if (locals.isLogged){%>
-          <li class="header-link"><a href="/users/detail/<%=locals.userLogged.id%>"><%=locals.userLogged.names%></a></li>
+          <li class="burger-header-name"><a href="/users/detail/<%=locals.userLogged.id%>"> <%=locals.userLogged.username%></a></li>
         <%}%>
         <% if (locals.isLogged){%>
           <li>
@@ -50,11 +50,11 @@
           <% if (locals.isLogged){%>
             <li><a class="burger-header-link" href="/users/logout">Logout</a></li>
           <%}%>
-          <% if (!locals.isLogged){%>
+          <% if (locals.isLogged && locals.userLogged.id==1){%>
             <li><a class="burger-header-link" href="/users/register">Register</a></li>
           <%}%>
           <% if (locals.isLogged){%>
-            <li class="burger-header-name"><a href="/users/detail/<%=locals.userLogged.id%>"><%=locals.userLogged.names%></a></li>
+            <li class="burger-header-name"><a href="/users/detail/<%=locals.userLogged.id%>"> <%=locals.userLogged.username%></a></li>
           
           <%}%>
             </ul>

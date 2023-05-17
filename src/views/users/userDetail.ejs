@@ -7,22 +7,20 @@
   <%- include('../partials/header') %>
     <main>
         <div class="container-profile" >
-            <div class="img-profile">
-                <img src="<%= user.image%>" alt="" >
-            </div>
+            
             <div class="data-profile">
-                <div class="data-profile-label"><p><label><strong>Nombres:</strong></label> <%= user.names%></p></div>
-                <div class="data-profile-label"><p><label><strong>Apellidos:</strong></label> <%= user.surnames%></p></div>
-                <div class="data-profile-label"><p><label><strong>Email:</strong></label> <%= user.email%></p></div>
-                <div class="data-profile-label"><p><label><strong>Direccion:</strong></label> <%= user.address%></p></div>
-                <div class="data-profile-label"><p><label><strong>Telefono:</strong></label> <%= user.phone%></p></div>
+                <div class="data-profile-label"><p><label><strong>Nombre:</strong></label> <%= user.username%></p></div>
+                <div class="data-profile-label"><p><label><strong>Apellidos:</strong></label> <%= user.surnames ? user.surnames :'Sin apellido registrado'%></p></div>
+                <div class="data-profile-label"><p><label><strong>Email:</strong></label> <%= user.username%></p></div>
+                <div class="data-profile-label"><p><label><strong>Direccion:</strong></label> <%= user.address ? user.address :'Sin direccion registrada'%></p></div>
+                <div class="data-profile-label"><p><label><strong>Telefono:</strong></label> <%= user.phone? user.phone :'Sin telefono registrado' %></p></div>
                 <%if(user.role!=undefined){%>
                 <div class="data-profile-label"><p><label><strong>Rol:</strong></label> <%= user.role.name%></p></div>
                 <%}%>
                
             </div>
             <div class="data-profile">
-                <% console.warn("user:",user.role.name)%>
+                <% /*console.warn("user:",user.role.name)*/%>
                 <% if(user.role!=undefined && (user.role.name.toUpperCase()=='admin'.toUpperCase()|| user.role.name.toUpperCase()=='administrador'.toUpperCase())){%>
                     <form action="/users/adminPanel" method="get">
                         <button class="panel-button" type="submit" ><i class="fa-regular fa-pen-to-square"></i> Panel admin</button>

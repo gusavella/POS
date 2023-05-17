@@ -18,12 +18,12 @@ function ready(){
 
     formAddProductWithCode.addEventListener("submit", async(e) => {
         e.preventDefault()
-        console.log('Ingreso a producto por codigo')
+        // console.log('Ingreso a producto por codigo')
         let body={code : formAddProductWithCode.code.value ? formAddProductWithCode.code.value : 0} 
-        console.log(body)
+        // console.log(body)
         const response = await fetchSearch(body)
         if(response && response.id!=undefined){
-            console.log('response de la api',response)
+            // console.log('response de la api',response)
             addItem(response)
             displayEmptyCart()
             displayCart()

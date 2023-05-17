@@ -5,7 +5,9 @@
     <main class="orders-container">
     <div class="orders-container" >
       <h3 class="title">Ordenes</h3>
-     
+      <form action=<%= `/orders/print/${userId}`%> method="get">
+     <button type="submit">Imprimir</button>
+     </form>
       <table description="orders table">
         <tr class="role-th">
           <th>Orden</th>
