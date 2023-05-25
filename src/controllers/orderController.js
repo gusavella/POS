@@ -135,7 +135,7 @@ try{
             // the magic
             let createdPDF=await doc.table(table);
             // done!
-            console.log(createdPDF)
+            // console.log(createdPDF)
             doc.end();fs.rmSync
         // // Leer el archivo PDF generado
         const file = fs.readFileSync('./public/tabla.pdf');

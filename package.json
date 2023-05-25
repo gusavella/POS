@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gusavella/grupo_6_Games_Hub.git"
+    "url": "git+https://github.com/gusavella/POS.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/gusavella/grupo_6_Games_Hub/issues"
+    "url": "https://github.com/gusavella/POS/issues"
   },
-  "homepage": "https://github.com/gusavella/grupo_6_Games_Hub#readme",
+  "homepage": "https://github.com/gusavella/POS#readme",
   "dependencies": {
     "@jridgewell/sourcemap-codec": "^1.4.15",
     "bcryptjs": "^2.4.3",
