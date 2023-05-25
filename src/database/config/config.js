@@ -15,8 +15,8 @@ module.exports = {
   },
   "production": {
     "username": "root",
-    "password": null,
-    "database": "database_production",
+    "password": "4902",
+    "database": "pos",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }

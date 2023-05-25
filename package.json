@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Sitema POS gustavo",
   "scripts": {
-    "start": "node ./src/bin/www",
+    "start": "node ./src/bin/www --production",
     "dev": "nodemon run ./src/bin/www"
   },
   "repository": {
