@@ -8,10 +8,7 @@ else {
 
 
 function ready() {
-let addProductButton = document.getElementById('add-product-button')
 let form = document.getElementById('form')
-let body=document.querySelector('body')
-let mainBox=document.getElementById('main')
 let name=document.getElementById('name')
 let description=document.getElementById('description')
 let category=document.getElementById('category')
@@ -21,18 +18,18 @@ let code = document.getElementById('code')
 let mark= document.getElementById('mark')
 let errorsBox= document.getElementById('errors')
 errorsBox.style.visibility='hidden'
-let isCheckedConsole=false
+
 
  form.addEventListener('submit',async (e)=>{
     const URLactual = window.location.href
     const isEditing =URLactual.includes('edit')
-    console.log(isEditing)
+    console.log('Esta editando:',isEditing)
     let errors =[];
     e.preventDefault()
 
     const response = await fetch('/api/products/')
     const {info,products} = await response.json()
-    if (isEditing!=true){
+    if (isEditing==false){
         if (name.value==""){
             errors.push('Debes ingresar un nombre')
             }
@@ -53,13 +50,14 @@ let isCheckedConsole=false
         }
         }
    
-    if (description.value.length<=0){
+
+    if (description.value.length<=0 && isDiferentId){
         errors.push('Debes ingresar una descripcion del producto')
         }
     else if (description.value.length>1 && description.value.length < 3 ){
         errors.push('Descripcion debe ser mayor o igual a 3 caracteres')
         }
-    if (category.value.length<=0){
+    if (category.value.length<=0 && isDiferentId){
         errors.push('Debes ingresar una categoria')
         }
     if (cost.value<0 ||cost.value==""){
@@ -68,10 +66,24 @@ let isCheckedConsole=false
     if (price.value<=0 ||price.value==""){
         errors.push('Debes ingresar un valor de producto mayor a cero')
        }
-       if (mark.value<=0){
-        errors.push('Debes ingresar un valor de marca mayor a cero')
-       }
-   
+    if (mark.value<=0){
+    errors.push('Debes ingresar un valor de marca mayor a cero')
+        }
+    if (code.value ==""|| code.value ==undefined ||code.value ==null){
+    errors.push('Debes ingresar un codigo no nulo')
+    }
+        
+    for ( let product of products){
+      //valida que este editando el mismo registro
+        const isDiferentId=product.id != URLactual.toString().split("/").slice(-2)[0]
+        
+        if (code.value ==product.code && isDiferentId){
+            errors.push('Debes ingresar un codigo no repetido')
+            } 
+        if(name.value==product.short_description && isDiferentId){
+            errors.push('Debes ingresar nombre de producto no repetido')
+        }
+    }
 
   console.log('errores:',errors.length)
     if (errors.length>0 ){
@@ -90,27 +102,13 @@ let isCheckedConsole=false
         )
       }
    else{
-    console.log('errores:',errors.length)
-    console.log('enviando info')
+    // console.log('errores:',errors.length)
+    // console.log('enviando info')
     form.submit()
    }
 
 })
 
-function drawErrors(errors){
-    mainBox.innerHTML+='' 
-   
-    errorsBox.innerHTML+='' 
-   
-        
-}
 
-function drawValues(){
- console.log('nombre:',name)
-  
-}
-
-
-// })
 
 }

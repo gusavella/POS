@@ -23,7 +23,7 @@
 
               <div class="edit-product-div">
                 <label for="name" class="edit-product-label">Nombre:</label>
-                <input type="text" name="name" id="name" value="<%=locals.oldData ? oldData.name : product.short_description%>" />
+                <input type="text" name="name" id="name" value="<%=locals.oldData ? locals.oldData.name : product.short_description%>" />
                 <% if (locals.errors && errors.name){%>
                   <div class="login-validation-error">
                       <%= errors.name.msg%>
@@ -33,7 +33,7 @@
               <div class="edit-product-div">
                 <label for="description" class="edit-product-label" >Descripcion:</label>
                 <textarea type="textarea" cols="40" rows="10" name="description" id="description"
-                  class="edit-product-text-area"><%=locals.oldData ? oldData.description : product.description%></textarea>
+                  class="edit-product-text-area"><%=locals.oldData ? locals.oldData.description : product.description%></textarea>
                   <% if (locals.errors && errors.description){%>
                     <div class="login-validation-error">
                         <%= errors.description.msg%>
@@ -44,8 +44,9 @@
               <div class="edit-product-div">
                 <label for="category" class="edit-product-label" >Categoria</label>
                 <select name="category" id="category">
-                  <% for (let i=0 ; i<categories.length ; i++) {%>
-                    <option value=<%=categories[i].id%> <%=product.category_id==categories[i].id ?'selected':''%> ><%= categories[i].name %></option>
+                 
+                  <% for (let category in categories) {%>
+                    <option value=<%=categories[category].id%> <%=product.id_category==categories[category].id ?'selected':''%> ><%= categories[category].name %></option>
                   <%}%>
                 </select>
                 <% if (locals.errors && errors.category){%>
@@ -54,9 +55,9 @@
                   </div>
               <%}%>
               </div>
-              <%console.log('oldData:',locals.oldData?oldData:'nada')%>
+              <%console.log('oldData:',locals.oldData?locals.oldData:'nada')%>
               <div class="edit-product-div">
-                <label for="mark" class="edit-product-label" >Categoria</label>
+                <label for="mark" class="edit-product-label" >Marca</label>
                 <select name="mark" id="mark">
                   <% for (let mark in marks) {%>
                     <option value=<%=marks[mark].id%> <%=product.id_mark==marks[mark].id ?'selected':''%> ><%= marks[mark].name %></option>
@@ -71,7 +72,7 @@
 
               <div class="edit-product-div">
                 <label for="cost" class="edit-product-label" >Costo:</label>
-                <input step="any" type="number" name="cost" id="cost" value="<%=locals.oldData ? oldData.cost : product.cost%>" />
+                <input step="any" type="number" name="cost" id="cost" value="<%=locals.oldData ? locals.oldData.cost : product.cost%>" />
                 <% if (locals.errors && errors.cost){%>
                   <div class="login-validation-error">
                       <%= errors.cost.msg%>
@@ -80,18 +81,18 @@
               </div>
           
               <div class="edit-product-div">
-                <label for="price" class="edit-product-label" >Precio:</label>
+                <label for="value" class="edit-product-label" >Precio:</label>
                
-                <input step="any" type="number" name="price" id="value" value="<%=locals.oldData ? oldData.price : product.price%>" />
-                <% if (locals.errors && errors.price){%>
+                <input step="any" type="number" name="value" id="value" value="<%=locals.oldData ? locals.oldData.value : product.price%>" />
+                <% if (locals.errors && errors.value){%>
                   <div class="login-validation-error">
-                      <%= errors.price.msg%>
+                      <%= errors.value.msg%>
                   </div>
               <%}%>
               </div>
               <div class="new-product-div">
                 <label for="name" class="new-product-label">Codigo: </label>
-                <input type="text" name="code" id="code" value="<%=locals.oldData ? oldData.code : product.code%>"
+                <input type="text" name="code" id="code" value="<%=locals.oldData ? locals.oldData.code : product.code%>"
                 placeholder="Ingrese codigo del producto"
                 value="<%= locals.oldData ? oldData.code : null %>"/>
     

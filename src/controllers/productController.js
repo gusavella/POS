@@ -108,7 +108,7 @@ console.log("Producto creado",createdProduct)
     let categories= await db.Category.findAll();
     let marks= await db.Mark.findAll();
     let product= await  db.Product.findByPk(req.params.id,{include: ["category","mark"]})
-  
+  //  console.log('Categorias en edit',categories)
     res.render("products/editProduct.ejs", { tittle: "Editar Producto" ,product,categories,marks});
     }
     catch(e){
@@ -125,6 +125,8 @@ console.log("Producto creado",createdProduct)
 
     const resultValidationProduct = validationResult(req);
       if (resultValidationProduct.errors.length > 0){
+        console.log('Error en la edicion del producto')
+        console.log('Errores:',resultValidationProduct.errors)
         return res.render('products/editProduct', { tittle: 'Editar Producto',
           categories,marks,product,
           errors: resultValidationProduct.mapped(),
@@ -132,15 +134,18 @@ console.log("Producto creado",createdProduct)
         })
       } else {
         try{
+
         const editedProduct={   
   short_description : req.body.name,
               price : req.body.value,
                cost : req.body.cost,
         description : req.body.description,
               image : req.file ?'/images/games/'+req.file.filename:productOld.image,
+               code : req.body.code ?   req.body.code : productOld.code,
         id_category : req.body.category,
             id_mark : req.body.mark,
-              stock : req.body.stock ?   req.body.stock : productOld.stock
+              stock : req.body.stock ?   req.body.stock : productOld.stock,
+            
 }
 
  await db.Product.update(editedProduct, {

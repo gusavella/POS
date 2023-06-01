@@ -4,7 +4,7 @@ module.exports = [
     body('name')
         .notEmpty().withMessage('Debes escribir un nombre para el producto').bail()
         .isLength({min:3}).withMessage('El nombre debe tener al menos 3 caracteres'),
-        body('code')
+    body('code')
         .notEmpty().withMessage('Debes ingresar un codigo').bail()
         .isLength({min:5}).withMessage('El codigo debe tener al menos 5 caracteres'),
     body('description')
