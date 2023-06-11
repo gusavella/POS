@@ -8,6 +8,7 @@
 }
 body {
     background: linear-gradient(to bottom, #D1FAFF,#9BD1E5);
+    min-height: 100vh;
 }
 
 /* ----------------------------------HEADER---------------------------------- */
@@ -393,8 +394,8 @@ a{
     bottom: 50px;
     text-align: center;
     background: rgba(0,0,0,0.5);
-    text-shadow: 3px 3px 20px #ff99cc,
-    -2px 1px 30px #ff99cc;
+    text-shadow: 3px 3px 20px #c599ff,
+    -2px 1px 30px #9b60fa;
 }
 
 .price-front-card {
@@ -406,8 +407,8 @@ a{
     bottom: 5px;
     text-align: center;
     background: rgba(0,0,0,0.5);
-    text-shadow: 3px 3px 20px #ff99cc,
-    -2px 1px 30px #ff99cc;
+    text-shadow: 3px 3px 20px #c599ff,
+    -2px 1px 30px #9b60fa;
 
 }
 
@@ -535,7 +536,8 @@ a{
 .main-container {
     display: flex;
     justify-content: space-evenly;
-    ;
+    min-height: 50vh;
+    
 }
 
 .adds {
